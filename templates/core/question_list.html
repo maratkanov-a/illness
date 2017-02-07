@@ -3,7 +3,7 @@
 {% load staticfiles %}
 
 {% block content %}
-    <form class="js-form-submit">
+    <form method="post" class="js-form-submit">
         {% csrf_token %}
         <div class="row">
             <div class="input-field col s6">
