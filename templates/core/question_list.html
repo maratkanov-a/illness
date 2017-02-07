@@ -1,0 +1,142 @@
+{% extends "base.html" %}
+
+{% load staticfiles %}
+
+{% block content %}
+    <form class="js-form-submit">
+        {% csrf_token %}
+        <div class="row">
+            <div class="input-field col s6">
+                <input id="first_name" type="text" class="validate">
+                <label for="first_name">Ваше имя</label>
+            </div>
+            <div class="input-field col s6">
+                <input id="last_name" type="text" class="validate">
+                <label for="last_name">Ваша фамилия</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s12">
+                <select>
+                    <option value="" disabled selected>Выберите 1 из предложенных вариантов</option>
+                    <option value="0">никогда</option>
+                    <option value="1">реже, чем 1 раз в неделю</option>
+                    <option value="2">реже, чем в половине случаев</option>
+                    <option value="3">примерно в половине случаев</option>
+                    <option value="4">чаще, чем в половине случаев</option>
+                    <option value="5">почти всегда</option>
+                </select>
+                <label>Как часто в течение последнего месяца у Вас было ощущение неполного опорожнения мочевого пузыря
+                    после мочеиспускания?</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s12">
+                <select>
+                    <option value="" disabled selected>Выберите 1 из предложенных вариантов</option>
+                    <option value="0">никогда</option>
+                    <option value="1">реже, чем 1 раз в неделю</option>
+                    <option value="2">реже, чем в половине случаев</option>
+                    <option value="3">примерно в половине случаев</option>
+                    <option value="4">чаще, чем в половине случаев</option>
+                    <option value="5">почти всегда</option>
+                </select>
+                <label>Как часто в течение последнего месяца у Вас была потребность мочиться чаще, чем через 2 часа
+                    после последнего мочеиспускания?</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s12">
+                <select>
+                    <option value="" disabled selected>Выберите 1 из предложенных вариантов</option>
+                    <option value="0">никогда</option>
+                    <option value="1">реже, чем 1 раз в неделю</option>
+                    <option value="2">реже, чем в половине случаев</option>
+                    <option value="3">примерно в половине случаев</option>
+                    <option value="4">чаще, чем в половине случаев</option>
+                    <option value="5">почти всегда</option>
+                </select>
+                <label>Как часто в течение последнего месяца у Вас имелось прерывистое мочеиспускание?</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s12">
+                <select>
+                    <option value="" disabled selected>Выберите 1 из предложенных вариантов</option>
+                    <option value="0">никогда</option>
+                    <option value="1">реже, чем 1 раз в неделю</option>
+                    <option value="2">реже, чем в половине случаев</option>
+                    <option value="3">примерно в половине случаев</option>
+                    <option value="4">чаще, чем в половине случаев</option>
+                    <option value="5">почти всегда</option>
+                </select>
+                <label>Как часто в течение последнего месяца Вам было трудно временно воздержаться от
+                    мочеиспускания?</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s12">
+                <select>
+                    <option value="" disabled selected>Выберите 1 из предложенных вариантов</option>
+                    <option value="0">никогда</option>
+                    <option value="1">реже, чем 1 раз в неделю</option>
+                    <option value="2">реже, чем в половине случаев</option>
+                    <option value="3">примерно в половине случаев</option>
+                    <option value="4">чаще, чем в половине случаев</option>
+                    <option value="5">почти всегда</option>
+                </select>
+                <label>Как часто в течение последнего месяца у Вас была слабая струя мочи?</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s12">
+                <select>
+                    <option value="" disabled selected>Выберите 1 из предложенных вариантов</option>
+                    <option value="0">никогда</option>
+                    <option value="1">реже, чем 1 раз в неделю</option>
+                    <option value="2">реже, чем в половине случаев</option>
+                    <option value="3">примерно в половине случаев</option>
+                    <option value="4">чаще, чем в половине случаев</option>
+                    <option value="5">почти всегда</option>
+                </select>
+                <label>Как часто в течение последнего месяца Вам приходилось натуживаться, чтобы начать
+                    мочеиспускание?</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s12">
+                <select>
+                    <option value="" disabled selected>Выберите 1 из предложенных вариантов</option>
+                    <option value="0">никогда</option>
+                    <option value="1">реже, чем 1 раз в неделю</option>
+                    <option value="2">реже, чем в половине случаев</option>
+                    <option value="3">примерно в половине случаев</option>
+                    <option value="4">чаще, чем в половине случаев</option>
+                    <option value="5">почти всегда</option>
+                </select>
+                <label>Как часто в течение последнего месяца Вам приходилось вставать ночью с постели, чтобы
+                    помочиться?</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s12">
+                <select>
+                    <option value="" disabled selected>Выберите 1 из предложенных вариантов</option>
+                    <option value="0">перкрасно</option>
+                    <option value="1">хорошо</option>
+                    <option value="2">удовлетворительно</option>
+                    <option value="3">смешанное чувство</option>
+                    <option value="4">неудовлетворительно</option>
+                    <option value="5">плохо</option>
+                    <option value="5">очень плохо</option>
+                </select>
+                <label>Как бы Вы отнеслись к тому, если бы Вам пришлось жить с имеющимися у Вас проблемами с мочеиспусканием до конца жизни?</label>
+            </div>
+        </div>
+        <button class="waves-effect waves-light btn" type="submit">Узнать диагноз</button>
+    </form>
+{% endblock %}
+
+{% block included_scripts %}
+    <script src="{% static "js/main.js" %}"></script>
+{% endblock %}

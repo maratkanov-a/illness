@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Болезни</title>
+    {% load staticfiles %}
+    <link rel="stylesheet" href="{% static 'css/materialize.min.css' %}">
+    {% block css %}
+    {% endblock %}
+</head>
+<body>
+<header>
+    <nav>
+        <div class="nav-wrapper">
+            <a href="{% url "core:index" %}" class="brand-logo">Определяем болезни</a>
+        </div>
+    </nav>
+</header>
+<main>
+    <div class="container">
+        <div class="col s12">
+            {% block content %}{% endblock %}
+        </div>
+    </div>
+</main>
+<footer class="page-footer" style="margin-top: 20px">
+    <div class="footer-copyright">
+        <div class="container">
+            © 2017 НИИ Урологии
+        </div>
+    </div>
+</footer>
+<script src="{% static 'js/jquery.min.js' %}"></script>
+<script src="{% static 'js/materialize.min.js' %}"></script>
+{% block included_scripts %}{% endblock %}
+</body>
+</html>
