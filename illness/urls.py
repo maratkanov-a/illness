@@ -9,7 +9,7 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url('^', include('django.contrib.auth.urls')),
 
-    url(r'^core/', include('core.urls', 'core')),
+    url(r'^', include('core.urls', 'core')),
 ]
 
 
