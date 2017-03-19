@@ -5,5 +5,29 @@
 {% endblock %}
 
 {% block content %}
-ИНФО
+    <ul class="collection with-header">
+        <li class="collection-header"><h4>{{ user.last_name }} {{ user.first_name }} {{ user.second_name }}</h4></li>
+        <li class="collection-item">
+            {{ user.email }}
+        </li>
+        <li class="collection-item">
+            Рост {{ user.height }}
+        </li>
+        <li class="collection-item">
+            Вес {{ user.weight }}
+        </li>
+        <li class="collection-item">
+            Дата рождения {{ user.birth_date }}
+        </li>
+        <li class="collection-item">
+            Индекс массы тела {{ user.mass_index }}
+        </li>
+        <li class="collection-item">
+            Оркужность талии {{ user.waist_circumference }}
+        </li>
+        <li class="collection-item">
+            <a class="btn" href="#">Моя карта</a>
+        </li>
+
+    </ul>
 {% endblock %}
