@@ -23,12 +23,19 @@ class Answer(models.Model):
 
 class Question(models.Model):
     text = models.TextField(max_length=50, verbose_name=u'Текст вопроса')
-    answer = models.ForeignKey(to=Answer, verbose_name=u'Ответ')
+    answer = models.ManyToManyField(to=Answer, verbose_name=u'Ответ')
 
 
 class Survey(models.Model):
+    name = models.CharField(max_length=200, verbose_name=u'Название опроса', default=u'')
     user = models.ForeignKey(to=User, verbose_name=u'Пользователь')
     questions = models.ManyToManyField(to=Question, verbose_name=u'Вопросы')
+
+
+class SurveyResult(models.Model):
+    user = models.ForeignKey(to=User, verbose_name=u'Пользователь')
+    survey = models.ForeignKey(to=Survey, verbose_name=u'Опрос')
+    result = models.ManyToManyField(to=Answer, verbose_name=u'Выбранные ответы')
 
 
 class Note(models.Model):
@@ -42,5 +49,6 @@ class Card(models.Model):
 
 
 class Diary(models.Model):
+    name = models.CharField(max_length=200, verbose_name=u'Название дневника', default=u'')
     user = models.ForeignKey(to=User, verbose_name=u'Пользователь')
     note = models.ManyToManyField(to=Note, verbose_name=u'Запись в дневнике')

@@ -6,12 +6,11 @@
     Авторизация
 {% endblock %}
 
-{% block included_css %}
-    <link rel="stylesheet" href="{% static 'css/login.css' %}">
-{% endblock %}
-
 {% block content %}
     <div class="row content__row__margin">
+        {% if form.errors %}
+            <div class="alert alert-danger">Неправильный логин/пароль</div>
+        {% endif %}
         <form method="post" action="{% url "login" %}">
             {% csrf_token %}
             <div class="row">

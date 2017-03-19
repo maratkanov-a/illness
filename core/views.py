@@ -1,12 +1,21 @@
+import json
+
 from django.urls import reverse_lazy
 from django.views import View
 from django.views.generic import CreateView
 from django.views.generic import DetailView
 from django.views.generic import ListView
 from django.views.generic import TemplateView
+from django.views.generic.list import BaseListView
 
-from core.forms import UserCreateForm, NoteCreateForm
-from core.models import User, Note, Diary, Survey
+from core.forms import UserCreateForm, NoteCreateForm, SurveyResultCreateForm
+from core.models import User, Note, Diary, Survey, SurveyResult, Answer
+
+
+class FilterByUser(BaseListView):
+    def get_queryset(self):
+        qs = super(FilterByUser, self).get_queryset().filter(user__id=self.request.user.id)
+        return qs
 
 
 class HomeTemplateView(TemplateView):
@@ -35,34 +44,39 @@ class UserDetailView(DetailView):
 # DIARY VIEWS ====================================
 
 
-class DiaryListView(ListView):
+class DiaryListView(ListView, FilterByUser):
     model = Diary
 
 
-class DiaryView(View):
-    def get(self, request, *args, **kwargs):
-        view = DiaryDetailView.as_view()
-        return view(request, *args, **kwargs)
+class DiaryDetailView(DetailView):
+    model = Diary
 
     def post(self, request, *args, **kwargs):
         view = NoteCreateView.as_view()
         return view(request, *args, **kwargs)
 
-
-class DiaryDetailView(DetailView):
-    model = Diary
+    def get_context_data(self, **kwargs):
+        context = super(DiaryDetailView, self).get_context_data(**kwargs)
+        context.update({
+            "form": NoteCreateForm
+        })
+        return context
 
 # ===============================================
 
 # USER VIEWS ====================================
 
 
-class SurveyListView(ListView):
+class SurveyListView(ListView, FilterByUser):
     model = Survey
 
 
 class SurveyDetailView(DetailView):
     model = Survey
+
+    def post(self, request, *args, **kwargs):
+        view = SurveyResultCreateView.as_view()
+        return view(request, *args, **kwargs)
 
 # ===============================================
 
@@ -72,3 +86,33 @@ class NoteCreateView(CreateView):
     form_class = NoteCreateForm
     success_url = reverse_lazy('core:index')
     template_name_suffix = '_create'
+
+    def form_valid(self, form):
+        result = super(NoteCreateView, self).form_valid(form)
+        diary_id = self.request.POST.get('diary_id', None)
+        if diary_id:
+            diary = Diary.objects.filter(id=diary_id).first()
+            diary.note.add(self.object)
+        return result
+
+
+class SurveyResultCreateView(CreateView):
+    model = SurveyResult
+    form_class = SurveyResultCreateForm
+    success_url = reverse_lazy('core:index')
+    template_name_suffix = '_create'
+
+    def post(self, request, *args, **kwargs):
+        survey_id = self.request.POST.get('survey_id', None)
+        answers_ids = self.request.POST.get('answers_ids', [])
+
+        if survey_id:
+            result = SurveyResult(**{
+                "user": User.objects.filter(id=self.request.user.id).first(),
+                "survey": Survey.objects.filter(id=survey_id).first()
+            })
+            result.save()
+            result.result.add(*Answer.objects.filter(id__in=json.loads(answers_ids)))
+
+        return super(SurveyResultCreateView, self).post(request, *args, **kwargs)
+

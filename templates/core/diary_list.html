@@ -1,9 +1,13 @@
-{%  extends 'base.html' %}
+{% extends 'base.html' %}
 
 {% block title %}
     Дневники
 {% endblock %}
 
 {% block content %}
-Список дневников
+    <div class="collection">
+        {% for object in object_list %}
+            <a href="{% url "core:diary_detail" pk=object.id %}" class="collection-item">{{ object.name }}</a>
+        {% endfor %}
+    </div>
 {% endblock %}

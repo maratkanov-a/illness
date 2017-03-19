@@ -1,9 +1,36 @@
 {% extends 'base.html' %}
 
+{% load staticfiles %}
+
 {% block title %}
     Дневник
 {% endblock %}
 
 {% block content %}
-Просмотреть дневничок
+    <ul class="collection with-header">
+        <li class="collection-header"><h4>Записи в дневнике "{{ object.name }}"</h4></li>
+        {% for el in object.note.all %}
+            <li class="collection-item">
+            <div>
+                {{ el.text }}
+                <a href="#!" class="secondary-content">
+                    {{ el.date_created }}
+                </a>
+            </div>
+        </li>
+        {% endfor %}
+        <form class="js-create-note" method="post" action="{% url "core:diary_detail" pk=object.id %}">
+            {% csrf_token %}
+            <li class="collection-header">
+                {{ form.text }}
+                <label for="text">{{ form.text.label }}</label>
+                <input class="btn" type="submit" value="Добавить запись">
+                <input type="hidden" name="diary_id" value="{{ object.id }}"/>
+            </li>
+        </form>
+    </ul>
+{% endblock %}
+
+{% block included_scripts %}
+    <script src="{% static "js/diary_detail.js" %}"></script>
 {% endblock %}

@@ -7,7 +7,6 @@
 {% block content %}
     <div class="row">
         {% if form.errors %}
-            {#  не работает  #}
             <div class="alert alert-danger">Пользователь уже создан или пароли не совпадают</div>
         {% endif %}
         <form method="post" class="col s12" action="{% url "core:registration" %}">
