@@ -7,7 +7,7 @@ from core.models import User, Note
 class UserCreateForm(UserCreationForm):
     class Meta:
         model = User
-        fields = ['username', 'password1', 'password2']
+        exclude = ['is_doctor', 'mass_index']
 
 
 class NoteCreateForm(forms.ModelForm):

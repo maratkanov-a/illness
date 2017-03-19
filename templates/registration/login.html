@@ -1,5 +1,36 @@
 {% extends 'base.html' %}
 
+{% load staticfiles %}
+
+{% block title %}
+    Авторизация
+{% endblock %}
+
+{% block included_css %}
+    <link rel="stylesheet" href="{% static 'css/login.css' %}">
+{% endblock %}
+
 {% block content %}
-АВТОРИЗАЦИЯ
+    <div class="row content__row__margin">
+        <form method="post" action="{% url "login" %}">
+            {% csrf_token %}
+            <div class="row">
+                <div class="input-field col s6">
+                    {{ form.username }}
+                    <label for="first_name">{{ form.username.label }}</label>
+                </div>
+                <div class="input-field col s6">
+                    {{ form.password }}
+                    <label for="first_name">{{ form.password.label }}</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col s12">
+                    <input class="btn" type="submit" value="Войти"/>
+                    <input type="hidden" name="next" value="{% url "core:index" %}"/>
+                </div>
+            </div>
+
+        </form>
+    </div>
 {% endblock %}

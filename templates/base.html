@@ -9,8 +9,8 @@
     </title>
     {% load staticfiles %}
     <link rel="stylesheet" href="{% static 'css/materialize.min.css' %}">
-    {% block css %}
-    {% endblock %}
+    {% block css %}{% endblock %}
+    {% block included_css %}{% endblock %}
 </head>
 <body>
 <header>
@@ -32,13 +32,6 @@
         </div>
     </div>
 </main>
-<footer class="page-footer" style="margin-top: 20px">
-    <div class="footer-copyright">
-        <div class="container">
-            © 2017 НИИ Урологии
-        </div>
-    </div>
-</footer>
 <script src="{% static 'js/jquery.min.js' %}"></script>
 <script src="{% static 'js/materialize.min.js' %}"></script>
 {% block included_scripts %}{% endblock %}
