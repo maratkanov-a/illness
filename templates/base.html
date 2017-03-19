@@ -2,7 +2,11 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Болезни</title>
+    <title>
+        {% block title %}
+            Болезни
+        {% endblock %}
+    </title>
     {% load staticfiles %}
     <link rel="stylesheet" href="{% static 'css/materialize.min.css' %}">
     {% block css %}
@@ -12,7 +16,12 @@
 <header>
     <nav>
         <div class="container nav-wrapper">
-            <a href="{% url "core:index" %}" class="brand-logo">Определяем болезни</a>
+            <ul id="nav-mobile" class="right hide-on-med-and-down">
+                <li><a href="{% url "core:profile" %}">Инфо</a></li>
+                <li><a href="{% url "core:survey" %}">Опросы</a></li>
+                <li><a href="{% url "core:diaries" %}">Дневники</a></li>
+            </ul>
+            {#            <a href="{% url "core:index" %}" class="brand-logo">Определяем болезни</a>#}
         </div>
     </nav>
 </header>
