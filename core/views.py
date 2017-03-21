@@ -1,7 +1,6 @@
 import json
 
 from django.urls import reverse_lazy
-from django.views import View
 from django.views.generic import CreateView
 from django.views.generic import DetailView
 from django.views.generic import ListView

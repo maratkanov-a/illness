@@ -8,7 +8,7 @@ from core.models import User, Note, SurveyResult
 class UserCreateForm(UserCreationForm):
     class Meta:
         model = User
-        exclude = ['is_doctor', 'mass_index']
+        fields = ['username', 'email', 'password1', 'password2', 'first_name', 'second_name', 'last_name', 'weight', 'height', 'birth_date', 'waist_circumference']
 
 
 class NoteCreateForm(forms.ModelForm):

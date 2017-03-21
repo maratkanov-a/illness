@@ -7,7 +7,11 @@
 {% block content %}
     <div class="row">
         {% if form.errors %}
-            <div class="alert alert-danger">Пользователь уже создан или пароли не совпадают</div>
+            <ol>
+                {% for error in form.errors %}
+                    <li><strong>{{ error }}</strong></li>
+                {% endfor %}
+            </ol>
         {% endif %}
         <form method="post" class="col s12" action="{% url "core:registration" %}">
             {% csrf_token %}
@@ -64,7 +68,7 @@
                 </div>
             </div>
             <input class="btn" type="submit" value="Зарегистрироваться">
-             <input type="hidden" name="next" value="{% url "core:index" %}"/>
+            <input type="hidden" name="next" value="{% url "core:index" %}"/>
         </form>
     </div>
 {% endblock %}
