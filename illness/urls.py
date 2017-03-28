@@ -8,6 +8,7 @@ from illness import settings
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url('^', include('django.contrib.auth.urls')),
+    url(r'^accounts/', include('allauth.urls')),
 
     url(r'^', include('core.urls', 'core')),
 ]

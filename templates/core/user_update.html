@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Профиль
+{% endblock %}
+
+{% block content %}
+    <div class="row">
+        {% if form.errors %}
+            <ol>
+                {% for error in form.errors %}
+                    <li><strong>{{ error }}</strong></li>
+                {% endfor %}
+            </ol>
+        {% endif %}
+        <form method="post" class="col s12" action="{% url "core:profile" %}">
+            {% csrf_token %}
+            <div class="row">
+                <div class="input-field col s4">
+                    {{ form.last_name }}
+                    <label for="first_name">{{ form.last_name.label }}</label>
+                </div>
+                <div class="input-field col s4">
+                    {{ form.first_name }}
+                    <label for="first_name">{{ form.first_name.label }}</label>
+                </div>
+                <div class="input-field col s4">
+                    {{ form.second_name }}
+                    <label for="first_name">{{ form.second_name.label }}</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s12">
+                    {{ form.email }}
+                    <label for="first_name">{{ form.email.label }}</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s3">
+                    {{ form.height }}
+                    <label for="first_name">{{ form.height.label }}</label>
+                </div>
+                <div class="input-field col s3">
+                    {{ form.weight }}
+                    <label for="first_name">{{ form.weight.label }}</label>
+                </div>
+                <div class="input-field col s3">
+                    {{ form.birth_date }}
+                    <label for="first_name">{{ form.birth_date.label }}</label>
+                </div>
+                <div class="input-field col s3">
+                    {{ form.waist_circumference }}
+                    <label for="first_name">{{ form.waist_circumference.label }}</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s6">
+                    {{ form.city }}
+                    <label for="first_name">{{ form.city.label }}</label>
+                </div>
+            </div>
+            <input class="btn" type="submit" value="Редактировать">
+            <input type="hidden" name="next" value="{% url "core:index" %}"/>
+        </form>
+    </div>
+{% endblock %}

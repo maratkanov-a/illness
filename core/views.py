@@ -1,3 +1,4 @@
+# coding=utf-8
 import json
 
 from django.urls import reverse_lazy
@@ -5,9 +6,10 @@ from django.views.generic import CreateView
 from django.views.generic import DetailView
 from django.views.generic import ListView
 from django.views.generic import TemplateView
+from django.views.generic import UpdateView
 from django.views.generic.list import BaseListView
 
-from core.forms import UserCreateForm, NoteCreateForm, SurveyResultCreateForm
+from core.forms import UserCreateForm, NoteCreateForm, SurveyResultCreateForm, UserUpdateForm
 from core.models import User, Note, Diary, Survey, SurveyResult, Answer
 
 
@@ -29,15 +31,32 @@ class UserCreateView(CreateView):
     success_url = reverse_lazy('core:index')
     template_name_suffix = '_create'
 
+    def form_valid(self, form):
+        from django.contrib.gis.geoip import GeoIP
+        g = GeoIP()
+        ip = self.request.META.get('REMOTE_ADDR', None)
 
-class UserDetailView(DetailView):
+        city = 'Moscow'
+        if ip and g.city(ip):
+            city = g.city(ip)['city']
+
+        form.instance.city = city
+
+        if form.instance.height and form.instance.weight and form.instance.waist_circumference:
+            form.instance.mass_index = 12  # ЗДЕСЬ ФОРМУЛА
+
+        return super(UserCreateView, self).form_valid(form)
+
+
+class UserUpdateView(UpdateView):
     model = User
-    template_name_suffix = '_detail'
+    form_class = UserUpdateForm
+    template_name_suffix = '_update'
+    success_url = reverse_lazy('core:index')
 
     def get_object(self, queryset=None):
         self.kwargs['pk'] = self.request.user.pk
-        return super(UserDetailView, self).get_object(queryset)
-
+        return super(UserUpdateView, self).get_object(queryset)
 # ===============================================
 
 # DIARY VIEWS ====================================

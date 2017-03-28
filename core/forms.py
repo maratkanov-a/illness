@@ -8,7 +8,13 @@ from core.models import User, Note, SurveyResult
 class UserCreateForm(UserCreationForm):
     class Meta:
         model = User
-        fields = ['username', 'email', 'password1', 'password2', 'first_name', 'second_name', 'last_name', 'weight', 'height', 'birth_date', 'waist_circumference']
+        fields = ['email', 'password1', 'password2']
+
+
+class UserUpdateForm(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = ['email', 'first_name', 'second_name', 'last_name', 'weight', 'height', 'birth_date', 'waist_circumference', 'city']
 
 
 class NoteCreateForm(forms.ModelForm):

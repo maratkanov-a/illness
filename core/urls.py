@@ -1,12 +1,12 @@
 from django.conf.urls import url
 
-from core.views import UserCreateView, NoteCreateView, HomeTemplateView, DiaryListView, UserDetailView, \
+from core.views import UserCreateView, NoteCreateView, HomeTemplateView, DiaryListView, UserUpdateView, \
     SurveyListView, SurveyDetailView, DiaryDetailView
 
 urlpatterns = [
     url(r'^$', HomeTemplateView.as_view(), name="index"),
 
-    url(r'profile/$', UserDetailView.as_view(), name="profile"),
+    url(r'profile/$', UserUpdateView.as_view(), name="profile"),
 
     url(r'survey/$', SurveyListView.as_view(), name="survey"),
     url(r'survey/(?P<pk>\d+)/detail/$', SurveyDetailView.as_view(), name="survey_detail"),
