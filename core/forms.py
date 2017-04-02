@@ -20,9 +20,12 @@ class UserUpdateForm(forms.ModelForm):
 class NoteCreateForm(forms.ModelForm):
     class Meta:
         model = Note
-        fields = ['text']
+        fields = ['volume_pis', 'neolozh_poziv', 'podtek', 'volume_drink']
         widgets = {
-            'text': Textarea(attrs={'class': 'materialize-textarea'}),
+            'volume_pis': Textarea(attrs={'class': 'materialize-textarea'}),
+            'neolozh_poziv': Textarea(attrs={'class': 'materialize-textarea'}),
+            'podtek': Textarea(attrs={'class': 'materialize-textarea'}),
+            'volume_drink': Textarea(attrs={'class': 'materialize-textarea'}),
         }
 
 
